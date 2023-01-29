@@ -1,0 +1,49 @@
+#iframe{
+  width: 480px;
+  height: 700px;
+  display: block;
+  margin: 0 auto;
+  align-self: center;
+}
+form {
+  width: 370px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.header{
+  letter-spacing: 1px;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="date"], input[type="email"], input[type="tel"], select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  background-color: #2A8E82;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+input[type="submit"]:hover {
+  background-color: #4A766E;
+}
+
+.container{
+  background-color: #dcdcdc;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <link rel="stylesheet" href="Form.css">
+</head>
+<body onload="loadCountries()">
+  <form class="container" onsubmit="return validateForm()">
+  <p class="header">Can you please provide your personal details?</p>
+  <label>Name:</label>
+  <input type="text" id="name" name="name" minlength="4" maxlength="10" required />
+  <br>
+  <label>Date of birth:</label>
+  <input type="date" id="dob" name="dob" required />
+  <br>
+  <label>Email address:</label>
+  <input type="email" id="email" name="email" required />
+  <br>
+  <label>Contact number:</label>
+  <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+  <br>
+  <label>Country:</label>
+  <select id="country" name="country" required>
+    <option value="" disabled selected>Select a country</option>
+  </select>
+  <br>
+  <label>State:</label>
+  <select id="state" name="state" required >
+    <option value="" disabled selected>Select a state</option>
+  </select>
+  <br>
+  
+  <input type="submit" value="Submit">
+</form>
+<script>
+  function validateForm() {
+  
+    alert("Success: All fields are valid.");
+    return false;
+  }
+      document.getElementById("country").addEventListener("change", function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://raw.githubusercontent.com/stefanbinder/countries-states/master/countries.json', true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var countries = JSON.parse(xhr.responseText);
+            for(var i = 0; i < countries.length; i++) {
+              if(countries[i].code2 === document.getElementById("country").value) {
+                var states = countries[i].states;
+                for(var j = 0; j < states.length; j++) {
+                  var opt = document.createElement('option');
+                  opt.value = states[j].code;
+                  opt.innerHTML = states[j].name;
+                  document.getElementById("state").appendChild(opt);
+                }
+              }
+            }
+          }
+        };
+        xhr.send();
+      });
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://raw.githubusercontent.com/stefanbinder/countries-states/master/countries.json', true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var countries = JSON.parse(xhr.responseText);
+          for(var i = 0; i < countries.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = countries[i].code2;
+            opt.innerHTML = countries[i].name;
+            document.getElementById("country").appendChild(opt);
+          }
+        }
+      };
+      xhr.send();
+</script>
+</body>
+</html>
